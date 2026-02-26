@@ -1,18 +1,18 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <>
-     <div>
-      <h1>Praktikum Next.js Pages Router</h1>
-      <p>Mahasisawa D4 Pengembangan Web</p>
-     </div>
-     <a href="/about">Tentang Saya</a>
-    </>
-  )
+  const { push } = useRouter();
+
+  useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+
+    if (!isLogin) {
+      push("/auth/login");
+    } else {
+      push("/produk");
+    }
+  }, []);
+
+  return null;
 }
