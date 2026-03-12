@@ -1,5 +1,6 @@
 import styles from "../../pages/produk/produk.module.scss";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Link from "next/link";
 
 type ProductType = {
   id: string;
@@ -15,9 +16,11 @@ const REDUCED_MOTION_TRANSITION_MS = 400;
 const TampilanProduk = ({
   products,
   loading,
+  detailBasePath = "/produk",
 }: {
   products: ProductType[];
   loading: boolean;
+  detailBasePath?: string;
 }) => {
   const [showSkeletonLayer, setShowSkeletonLayer] = useState(loading);
   const [showProductLayer, setShowProductLayer] = useState(!loading);
@@ -97,6 +100,9 @@ const TampilanProduk = ({
       isReducedMotion ? REDUCED_MOTION_TRANSITION_MS : transitionMs
     }ms`,
   };
+  const normalizedDetailBasePath = detailBasePath.endsWith("/")
+    ? detailBasePath.slice(0, -1)
+    : detailBasePath;
 
   const skeletonLayerClassName = [
     styles.produk__content__layer,
@@ -135,20 +141,26 @@ const TampilanProduk = ({
 
         <div className={productLayerClassName} aria-hidden={!showProductLayer}>
           {products.map((product: ProductType) => (
-            <div key={product.id} className={styles.produk__content__item}>
-              <div className={styles.produk__content__item__image}>
-                <img src={product.image} alt={product.name} width={200} />
+            <Link
+              href={`${normalizedDetailBasePath}/${product.id}`}
+              key={product.id}
+              passHref
+            >
+              <div className={styles.produk__content__item}>
+                <div className={styles.produk__content__item__image}>
+                  <img src={product.image} alt={product.name} width={200} />
+                </div>
+                <h4 className={styles.produk__content__item__name}>
+                  {product.name}
+                </h4>
+                <p className={styles.produk__content__item__category}>
+                  {product.category}
+                </p>
+                <p className={styles.produk__content__item__price}>
+                  Rp {product.price.toLocaleString("id-ID")}
+                </p>
               </div>
-              <h4 className={styles.produk__content__item__name}>
-                {product.name}
-              </h4>
-              <p className={styles.produk__content__item__category}>
-                {product.category}
-              </p>
-              <p className={styles.produk__content__item__price}>
-                Rp {product.price.toLocaleString()}
-              </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

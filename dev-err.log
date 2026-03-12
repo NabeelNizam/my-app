@@ -1,0 +1,5 @@
+⚠ Duplicate page detected. src\pages\auth\login.tsx and src\pages\auth\login\index.tsx resolve to /auth/login
+⚠ Duplicate page detected. src\pages\auth\register.tsx and src\pages\auth\register\index.tsx resolve to /auth/register
+⚠ Duplicate page detected. src\pages\auth\login.tsx and src\pages\auth\login\index.tsx resolve to /auth/login
+⚠ Duplicate page detected. src\pages\auth\register.tsx and src\pages\auth\register\index.tsx resolve to /auth/register
+^C

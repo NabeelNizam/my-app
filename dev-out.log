@@ -1,0 +1,14 @@
+
+> my-app@0.1.0 dev
+> next dev --port 3011
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3011
+- Network:       http://192.168.56.1:3011
+- Environments: .env.local
+
+✓ Starting...
+Creating turbopack project { dir: 'D:\\Kuliaah\\SEM6\\PBF\\Praktikum\\my-app', testMode: true }
+✓ Ready in 937ms
+ GET /api/hello 200 in 38ms (compile: 28ms, render: 10ms)
+ GET /api/produk/test123 200 in 447ms (compile: 215ms, render: 232ms)

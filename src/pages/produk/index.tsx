@@ -1,15 +1,19 @@
 import TampilanProduk from "@/views/produk";
 import useSWR from "swr";
-import fetcher from "../utlis/swr/fetcher";
+import fetcher from "@/utils/swr/fetcher";
 
 const kategori = () => {
-  const { data, isLoading } = useSWR("/api/produk", fetcher);
+    const { data, isLoading } = useSWR("/api/produk", fetcher);
 
-  return (
-    <div>
-      <TampilanProduk products={data?.data || []} loading={isLoading} />
-    </div>
-  );
+    return (
+        <div>
+            <TampilanProduk 
+                products={data?.data || []} 
+                loading={isLoading} 
+                detailBasePath="/produk"
+            />
+        </div>
+    );
 };
 
 export default kategori;
