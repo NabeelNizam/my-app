@@ -1,6 +1,7 @@
 export default function About() {
   return (
     <div>
+      <h1 data-testid="title">About Page</h1>
       <h1>Halaman About</h1>
       <p>Nama: Nabeel Nizam</p>
       <p>NIM: 2341720155</p>

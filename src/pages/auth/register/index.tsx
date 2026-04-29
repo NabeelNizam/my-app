@@ -1,13 +1,12 @@
 import Link from "next/link";
 import styles from "./register.module.css";
+import TampilanRegister from "../../../views/auth/register";
 
-const TampilanRegister = () => {
+
+const halamanRegister = () => {
   return (
-    <div className={styles.register}>
-    <h1 className="text-3xl font-bold text-green-600">Halaman Register</h1>
-      <Link href="/auth/login">Ke Halaman Login</Link>
-    </div>
+    <TampilanRegister />
   );
 };
 
-export default TampilanRegister;
+export default halamanRegister;

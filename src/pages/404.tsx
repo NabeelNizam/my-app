@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "@/styles/404.module.scss";
+import Image from "next/image";
 
 const custom404 = () => {
     return (
@@ -10,7 +11,15 @@ const custom404 = () => {
         </head>
 
         <div className={styles.error}>
-            <img src="/page-not-found.png" alt="404" className={styles.error__image} />
+            {/* <img src="/page-not-found.png" alt="404" className={styles.error__image} /> */}
+            <Image
+                src="/page-not-found.png"
+                alt="404"
+                className={styles.error__image}
+                width={400}
+                height={200}
+                />
+                
             <h1 className={styles.error__title}>
                 404 - Halaman Tidak Ditemukan
             </h1>

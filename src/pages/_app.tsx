@@ -2,15 +2,12 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import AppShell from '@/components/layouts/AppShell';
 import Navbar from '@/components/layouts/navbar'
+import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { children } = pageProps;
   return (
-    <main>
-      {children}
-    <AppShell>
-      <Component {...pageProps} />
-    </AppShell>
-    </main>
+    <SessionProvider session={pageProps.session}>
+      <AppShell><Component {...pageProps}></Component></AppShell>
+    </SessionProvider>
   )
 }

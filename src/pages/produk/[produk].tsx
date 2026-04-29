@@ -1,36 +1,41 @@
 import DetailProduk from "@/views/DetailProduk";
 import { ProductType } from "@/types/Product.type";
-import fetcher from "@/utils/swr/fetcher";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 
 type DetailProductResponse = {
   data: ProductType;
 };
 
-const HalamanDetailProdukCSR = () => {
-  const router = useRouter();
-  const produkId =
-    typeof router.query.produk === "string" ? router.query.produk : undefined;
+type Props = {
+  product: ProductType | null;
+};
 
-  const { data, error, isLoading } = useSWR<DetailProductResponse>(
-    router.isReady && produkId ? `/api/produk/${produkId}` : null,
-    fetcher
-  );
-
-  if (!router.isReady || isLoading) {
-    return <p>Memuat detail produk...</p>;
-  }
-
-  if (error) {
-    return <p>Gagal memuat detail produk.</p>;
-  }
-
-  if (!data?.data) {
+export default function HalamanDetailProdukSSR({ product }: Props) {
+  if (!product) {
     return <p>Produk tidak ditemukan.</p>;
   }
 
-  return <DetailProduk products={data.data} renderMode="CSR" />;
-};
+  return <DetailProduk products={product} renderMode="SSR" />;
+}
 
-export default HalamanDetailProdukCSR;
+export async function getServerSideProps(context: any) {
+  const { params } = context;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/api/produk/${params?.produk}`
+    );
+    const response: DetailProductResponse = await res.json();
+
+    return {
+      props: {
+        product: response.data || null,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        product: null,
+      },
+    };
+  }
+}
