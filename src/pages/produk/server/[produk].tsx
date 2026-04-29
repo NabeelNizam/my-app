@@ -1,5 +1,5 @@
 import { ProductType } from "@/types/Product.type";
-import { retrieveDataByID } from "@/utils/db/servicefirebase";
+import { retrieveProductById } from "@/utils/db/servicefirebase";
 import DetailProduk from "@/views/DetailProduk";
 import { GetServerSideProps } from "next";
 
@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<DetailProdukSSRProps> =
       return { notFound: true };
     }
 
-    const detailProduk = await retrieveDataByID("products", produkId);
+    const detailProduk = await retrieveProductById("products", produkId);
 
     if (!detailProduk) {
       return { notFound: true };

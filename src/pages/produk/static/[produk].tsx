@@ -1,5 +1,5 @@
 import { ProductType } from "@/types/Product.type";
-import { retrieveDataByID, retrieveProducts } from "@/utils/db/servicefirebase";
+import { retrieveProductById, retrieveProducts } from "@/utils/db/servicefirebase";
 import DetailProduk from "@/views/DetailProduk";
 import { GetStaticPaths, GetStaticProps } from "next";
 
@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
 
-  const detailProduk = await retrieveDataByID("products", produkId);
+  const detailProduk = await retrieveProductById("products", produkId);
 
   if (!detailProduk) {
     return { notFound: true };
